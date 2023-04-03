@@ -1,7 +1,25 @@
 import React from 'react'
 import { formatearFecha } from '../helpers'
 
+import IconoAhorro from '../img/icono_ahorro.svg'
+import IconoCasa from '../img/icono_casa.svg'
+import IconoComida from '../img/icono_comida.svg'
+import IconoGastos from '../img/icono_gastos.svg'
+import IconoOcio from '../img/icono_ocio.svg'
+import IconoSalud from '../img/icono_salud.svg'
+import IconoSuscripciones from '../img/icono_suscripciones.svg'
+
 const Gasto = ({ gasto }) => {
+  const diccionariIconos = {
+    ahorro: IconoAhorro,
+    casa: IconoCasa,
+    comida: IconoComida,
+    gastos: IconoGastos,
+    ocio: IconoOcio,
+    salud: IconoSalud,
+    suscripciones: IconoSuscripciones
+  }
+
   return (
     <div
       className='gasto sombra'
@@ -9,6 +27,7 @@ const Gasto = ({ gasto }) => {
       <div
         className='contenido-gasto'
       >
+        <img src={diccionariIconos[gasto.categoria]} />
         <div className='descripcion-gasto'>
           <p className='categoria'>{gasto.categoria}</p>
           <p className='nombre-gasto'>{gasto.nombre}</p>
