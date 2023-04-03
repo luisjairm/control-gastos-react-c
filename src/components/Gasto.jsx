@@ -1,4 +1,12 @@
 import React from 'react'
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions
+} from 'react-swipeable-list'
+import 'react-swipeable-list/dist/styles.css'
 import { formatearFecha } from '../helpers'
 
 import IconoAhorro from '../img/icono_ahorro.svg'
@@ -20,22 +28,32 @@ const Gasto = ({ gasto }) => {
     suscripciones: IconoSuscripciones
   }
 
+  const leadingActions = () => { console.log('Editar') }
+  const trailingActions = () => { console.log('eliminar') }
+
   return (
-    <div
-      className='gasto sombra'
-    >
-      <div
-        className='contenido-gasto'
+    <SwipeableList>
+      <SwipeableListItem
+        leadingActions={leadingActions}
+        trailingActions={trailingActions}
       >
-        <img src={diccionariIconos[gasto.categoria]} />
-        <div className='descripcion-gasto'>
-          <p className='categoria'>{gasto.categoria}</p>
-          <p className='nombre-gasto'>{gasto.nombre}</p>
-          <p className='fecha-gasto'>Agreagado el: <span> {formatearFecha(gasto.fecha)}</span></p>
+        <div
+          className='gasto sombra'
+        >
+          <div
+            className='contenido-gasto'
+          >
+            <img src={diccionariIconos[gasto.categoria]} />
+            <div className='descripcion-gasto'>
+              <p className='categoria'>{gasto.categoria}</p>
+              <p className='nombre-gasto'>{gasto.nombre}</p>
+              <p className='fecha-gasto'>Agreagado el: <span> {formatearFecha(gasto.fecha)}</span></p>
+            </div>
+          </div>
+          <div className='cantidad-gasto'>${gasto.cantidad}</div>
         </div>
-      </div>
-      <div className='cantidad-gasto'>${gasto.cantidad}</div>
-    </div>
+      </SwipeableListItem>
+    </SwipeableList>
   )
 }
 
