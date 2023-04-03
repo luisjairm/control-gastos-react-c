@@ -23,7 +23,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
         setMensaje('')
       }, 3000)
     } else {
-      guardarGasto({ nombre, cantidad, categoria })
+      guardarGasto({ nombre, cantidad: Number(cantidad), categoria })
     }
   }
   return (
