@@ -13,6 +13,7 @@ function App () {
     // eslint-disable-next-line no-undef
     localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
   )
+  const [gastosFiltrados, setGastosFiltrados] = useState([])
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [modal, setModal] = useState(false)
   const [animarModal, setAnimarModal] = useState(false)
@@ -21,7 +22,8 @@ function App () {
 
   useEffect(() => {
     if (filtro) {
-      console.log('Filtrando')
+      const gastosFil = gastos.filter(gasto => gasto.categoria === filtro)
+      setGastosFiltrados(gastosFil)
     }
   }, [filtro])
 
@@ -102,6 +104,8 @@ function App () {
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              gastosFiltrados={gastosFiltrados}
+              filtro={filtro}
             />
           </main>
           <div className='nuevo-gasto'>
