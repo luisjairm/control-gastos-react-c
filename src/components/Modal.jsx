@@ -6,13 +6,17 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
   const [mensaje, setMensaje] = useState('')
   const [nombre, setNombre] = useState('')
   const [cantidad, setCantidad] = useState('')
-  const [categoria, setCategoria] = useState('seleccione')
+  const [categoria, setCategoria] = useState('')
+  const [fecha, setFecha] = useState('')
+  const [id, setId] = useState('')
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
       setNombre(gastoEditar.nombre)
       setCantidad(gastoEditar.cantidad)
       setCategoria(gastoEditar.categoria)
+      setId(gastoEditar.id)
+      setFecha(gastoEditar.fecha)
     }
   }, [])
 
@@ -31,7 +35,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
         setMensaje('')
       }, 3000)
     } else {
-      guardarGasto({ nombre, cantidad: Number(cantidad), categoria })
+      guardarGasto({ nombre, cantidad: Number(cantidad), categoria, id, fecha })
     }
   }
   return (
@@ -47,7 +51,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
         onSubmit={handleSubmit}
       >
 
-        <legend>Nuevo Gasto</legend>
+        <legend>{gastoEditar.nombre ? 'Editar Gasto' : 'Nuevo Gasto'}</legend>
         {mensaje && (
           <Mensaje tipo='error'>
             {mensaje}
@@ -93,7 +97,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
 
         <input
           type='submit'
-          value='Añadir Gastos'
+          value={gastoEditar.nombre ? 'Actualizar Gasto' : 'Añadir Gasto'}
         />
       </form>
     </div>
