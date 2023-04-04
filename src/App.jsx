@@ -6,11 +6,15 @@ import { generarId } from './helpers/index'
 import ListadoGastos from './components/ListadoGastos'
 
 function App () {
-  const [presupuesto, setPresupuesto] = useState(0)
+  // eslint-disable-next-line no-undef
+  const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) ?? 0)
+  const [gastos, setGastos] = useState(
+    // eslint-disable-next-line no-undef
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  )
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [modal, setModal] = useState(false)
   const [animarModal, setAnimarModal] = useState(false)
-  const [gastos, setGastos] = useState([])
   const [gastoEditar, setGastoEditar] = useState({})
 
   useEffect(() => {
@@ -21,6 +25,22 @@ function App () {
       }, 500)
     }
   }, [gastoEditar])
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0
+    if (presupuestoLS > 0) {
+      setIsValidPresupuesto(true)
+    }
+  }, [])
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('presupuesto', presupuesto ?? 0)
+  }, [presupuesto])
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
+  }, [gastos])
 
   const handleNuevoGasto = () => {
     setGastoEditar({})
