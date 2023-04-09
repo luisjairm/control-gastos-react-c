@@ -4,7 +4,6 @@ Proyecto realizado en el curso [React - La Guía Completa: Hooks Context Redux M
 
 ### Lo que aprendí:
 - Crear un proyecto con Vitejs
-- Tailwindcss
 - useState
 - useEffect
 - Condicional ternario
